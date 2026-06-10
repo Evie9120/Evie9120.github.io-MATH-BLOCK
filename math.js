@@ -1,4 +1,4 @@
-   (function(){
+(function(){
     // ----- DOM elements -----
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
@@ -225,18 +225,7 @@
         stopBackgroundMusic();
     }
     
-    function checkOvershoot() {
-        if (!gameActive) return false;
-        if (currentSum > targetNumber) {
-            // reset sum and continue — overshoot just resets, not a loss
-            currentSum = 0;
-            updateUI();
-            addFloater(canvas.width/2, cannonY - 60, "OVERSHOOT! Reset ↺");
-            return false;
-        }
-        return false;
-    }
-    
+
     function onTargetCleared() {
         const aliveCount = blocks.length;
         let pointsEarned = 10;
@@ -305,10 +294,8 @@
                     if (currentSum === targetNumber) {
                         onTargetCleared();
                     } else if (currentSum > targetNumber) {
-                        // overshoot: reset sum and notify, game continues
-                        currentSum = 0;
-                        updateUI();
-                        addFloater(canvas.width/2, cannonY - 60, "OVERSHOOT! Reset ↺");
+                        endGame(false, "OVERLOAD! 🔥 Too high");
+                        return;
                     }
                     break;
                 }
