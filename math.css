@@ -1,0 +1,191 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background: #02040c;
+    overflow: hidden;
+    font-family: 'Segoe UI', 'Poppins', monospace;
+    touch-action: none;
+}
+
+canvas {
+    display: block;
+    cursor: crosshair;
+    width: 100%;
+    height: 100%;
+}
+
+/* home screen */
+#homeScreen {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    background: radial-gradient(circle at 20% 30%, #0a1428, #010308);
+}
+.game-title {
+    font-size: 3.2rem;
+    font-weight: 800;
+    letter-spacing: 4px;
+    background: linear-gradient(135deg, #b5f0ff, #6c9eff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 20px rgba(0,160,255,0.5);
+    margin-bottom: 20px;
+}
+.sub {
+    color: #aaccee;
+    margin-bottom: 40px;
+    font-family: monospace;
+}
+.menu-btn {
+    background: linear-gradient(105deg, #1e6faa, #0099e6);
+    border: none;
+    padding: 12px 38px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: white;
+    border-radius: 60px;
+    cursor: pointer;
+    margin: 12px;
+    width: 220px;
+    transition: transform 0.1s, box-shadow 0.1s;
+    box-shadow: 0 5px 0 #0a3855;
+}
+.menu-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #0a3855;
+}
+.diff-text {
+    font-size: 14px;
+    color: #bbd9ff;
+    margin-top: 25px;
+    background: rgba(0,0,0,0.4);
+    padding: 6px 18px;
+    border-radius: 40px;
+}
+
+/* HUD */
+.hud {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(12px);
+    border-radius: 28px;
+    padding: 8px 18px;
+    border: 1px solid rgba(80, 180, 255, 0.4);
+    z-index: 40;
+    font-family: monospace;
+    text-align: right;
+    pointer-events: none;
+}
+.hud-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-end;
+    gap: 12px;
+    margin: 2px 0;
+}
+.hud-label { font-size: 11px; color: #9acdff; }
+.hud-value { font-size: 26px; font-weight: 800; text-shadow: 0 0 6px cyan; }
+#targetVal { color: #7cf5ff; }
+#scoreVal { color: #ffde8a; }
+#totalScoreSpan { color: #ffaa66; font-size: 20px; }
+.progress-compact {
+    width: 150px;
+    height: 4px;
+    background: rgba(0,0,0,0.5);
+    border-radius: 12px;
+    margin-top: 8px;
+    overflow: hidden;
+}
+#fillBar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #2aff8c, #00e0ff);
+    border-radius: 12px;
+    transition: width 0.15s;
+}
+#needHint { font-size: 10px; color: #bbddff; margin-top: 5px; }
+
+/* pause + sound buttons */
+.top-left-buttons {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    display: flex;
+    gap: 12px;
+    z-index: 50;
+}
+.icon-btn {
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,215,100,0.5);
+    border-radius: 40px;
+    padding: 8px 16px;
+    color: #ffecb3;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.1s;
+}
+.icon-btn:active { background: #2a6f9c; }
+
+.modal {
+    position: absolute;
+    inset: 0;
+    background: rgba(3, 8, 18, 0.92);
+    backdrop-filter: blur(20px);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 150;
+}
+.modal .menu-btn { margin: 12px; width: 200px; }
+.modal h2 { color: white; margin-bottom: 30px; font-size: 2rem; }
+.score-display { color: #ffdd99; font-size: 1.2rem; margin-top: 15px; }
+
+.status-badge {
+    position: absolute;
+    bottom: 18px;
+    left: 18px;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(6px);
+    padding: 4px 14px;
+    border-radius: 40px;
+    font-size: 11px;
+    color: #d0f0ff;
+    pointer-events: none;
+    z-index: 40;
+    border-left: 3px solid #2aaaff;
+}
+.aim-tip {
+    position: absolute;
+    bottom: 70px;
+    right: 16px;
+    background: rgba(0,0,0,0.5);
+    border-radius: 30px;
+    padding: 5px 12px;
+    font-size: 10px;
+    color: #ccc;
+    pointer-events: none;
+    backdrop-filter: blur(4px);
+    z-index: 40;
+}
+@media (max-width: 600px) {
+    .game-title { font-size: 2.2rem; }
+    .menu-btn { width: 180px; padding: 10px 24px; font-size: 1.1rem; }
+    .hud-value { font-size: 22px; }
+    .icon-btn { padding: 6px 12px; font-size: 11px; }
+}
