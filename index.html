@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>MATH SHOOT · COLUMN SHIFT</title>
+    <link rel="stylesheet" href="math.css">
+</head>
+<body>
+
+<!-- HOME SCREEN -->
+<div id="homeScreen">
+    <div class="game-title">⚡ MATH SHOOT ⚡</div>
+    <div class="sub">aim with mouse/touch → dotted line bounces → shoot</div>
+    <button class="menu-btn" id="startGameBtn">🎯 START GAME</button>
+</div>
+
+<!-- IN-GAME HUD -->
+<div id="gameHud" style="display: none;">
+    <div class="top-left-buttons">
+        <div id="pauseBtn" class="icon-btn">⏸ PAUSE</div>
+        <div id="soundToggleBtn" class="icon-btn">🔊 SOUND ON</div>
+    </div>
+    <div class="hud">
+        <div class="hud-row"><span class="hud-label">🎯 TARGET</span><span class="hud-value" id="targetVal">0</span></div>
+        <div class="hud-row"><span class="hud-label">⚡ SCORE</span><span class="hud-value" id="scoreVal">0</span></div>
+        <div class="hud-row"><span class="hud-label">🏆 TOTAL</span><span class="hud-value" id="totalScoreSpan">0</span></div>
+        <div class="progress-compact"><div id="fillBar"></div></div>
+        <div id="needHint">need <span id="needSpan">0</span> more</div>
+    </div>
+    <div class="status-badge" id="statusMsg">✨ move to aim → click to shoot</div>
+</div>
+
+<!-- PAUSE MENU -->
+<div id="pauseMenu" class="modal">
+    <h2>⏸ GAME PAUSED</h2>
+    <button class="menu-btn" id="resumeBtn">▶ RESUME</button>
+    <button class="menu-btn" id="endGameBtn">🏁 END GAME</button>
+    <button class="menu-btn" id="pauseToMenuBtn">🏠 MAIN MENU</button>
+</div>
+
+<!-- GAME OVER MENU -->
+<div id="gameOverMenu" class="modal">
+    <h2 id="gameOverTitle"></h2>
+    <div class="score-display" id="finalScoreDisplay"></div>
+    <div class="score-display" id="highScoreDisplay"></div>
+    <button class="menu-btn" id="playAgainBtn">🔄 PLAY AGAIN</button>
+    <button class="menu-btn" id="gameOverToMenuBtn">🏠 MAIN MENU</button>
+</div>
+
+<canvas id="gameCanvas"></canvas>
+
+<script src="math.js"></script>
+</body>
+</html>
